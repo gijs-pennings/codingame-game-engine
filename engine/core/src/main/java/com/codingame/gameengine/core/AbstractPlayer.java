@@ -27,6 +27,7 @@ abstract public class AbstractPlayer {
     protected int index;
     private List<String> inputs = new ArrayList<>();
     private List<String> outputs;
+    private int totalTimeUsed;
     private boolean timeout;
     private int score;
     private boolean hasBeenExecuted;
@@ -153,6 +154,15 @@ abstract public class AbstractPlayer {
 
     final void setOutputs(List<String> outputs) {
         this.outputs = outputs;
+    }
+
+    public final int getTotalTimeUsed() {
+        return totalTimeUsed;
+    }
+
+    // TODO
+    final void addTimeUsed(int time) {
+        totalTimeUsed += time;
     }
 
     final void setTimeout(boolean timeout) {

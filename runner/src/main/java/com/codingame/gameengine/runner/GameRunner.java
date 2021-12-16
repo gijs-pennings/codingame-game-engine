@@ -262,6 +262,7 @@ abstract class GameRunner {
         queues.get(nextPlayerInfo.nextPlayer).offer(nextPlayerInput);
 
         // Wait for player output then read error
+        // TODO: measure and report back time
         String playerOutput = player.getOutput(nextPlayerInfo.nbLinesNextOutput, nextPlayerInfo.timeout);
         if (playerOutput != null)
             playerOutput = playerOutput.replace('\r', '\n');
@@ -278,7 +279,7 @@ abstract class GameRunner {
             }
             // Read this turns stderr and the crash output
             readError(player);
-            return null;
+            return null; // ==> timeout
         }
 
         if ((playerOutput != null) && playerOutput.isEmpty() && (nextPlayerInfo.nbLinesNextOutput == 1)) {
@@ -290,7 +291,7 @@ abstract class GameRunner {
         ) {
             return playerOutput + '\n';
         }
-        return playerOutput;
+        return playerOutput; // ==> timeout if null
     }
 
     private GameTurnInfo readGameInfo(int round) {

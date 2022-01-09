@@ -27,7 +27,7 @@ public final class TimeoutSettings {
         if (mode == Mode.PER_TURN)
             return player.hasNeverBeenExecuted() ? limitFirst : limit;
         else
-            return Math.max(limit - player.getTotalTimeUsed(), 0);
+            return Math.max(limit - player.getTotalTimeSpentMs(), 0);
     }
 
     private enum Mode { PER_TURN, TOTAL }

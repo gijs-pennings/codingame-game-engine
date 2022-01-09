@@ -185,18 +185,17 @@ abstract public class GameManager<T extends AbstractPlayer> {
             dumpView();
             dumpInfos();
             dumpNextPlayerInput(player.getInputs().toArray(new String[0]));
-            if (nbrOutputLines > 0) {
-                addTurnTime();
-            }
             dumpNextPlayerInfos(player.getIndex(), nbrOutputLines, timeoutSettings.getMaxTurnTime(player));
 
             // READ PLAYER OUTPUTS
             iCmd = InputCommand.parse(s.nextLine());
             if (iCmd.cmd == InputCommand.Command.SET_PLAYER_OUTPUT) {
-                List<String> output = new ArrayList<>(iCmd.lineCount);
-                for (int i = 0; i < iCmd.lineCount; i++) {
+                final long timeSpent = Long.parseLong(s.nextLine());
+                List<String> output = new ArrayList<>(iCmd.lineCount - 1);
+                for (int i = 0; i < iCmd.lineCount - 1; i++) {
                     output.add(s.nextLine());
                 }
+                player.addTimeSpent(timeSpent);
                 player.setOutputs(output);
             } else if (iCmd.cmd == InputCommand.Command.SET_PLAYER_TIMEOUT) {
                 player.setTimeout(true);
@@ -522,20 +521,6 @@ abstract public class GameManager<T extends AbstractPlayer> {
         } else if (!summaryWarning) {
             log.warn("Warning: the game summary is full. Please try to send less data.");
             summaryWarning = true;
-        }
-    }
-
-    private void addTurnTime() {
-        totalTurnTime += 0; // TODO
-        if (totalTurnTime > GAME_DURATION_HARD_QUOTA) {
-            throw new RuntimeException(String.format("Total game duration too long (>%dms)", GAME_DURATION_HARD_QUOTA));
-        } else if (totalTurnTime > GAME_DURATION_SOFT_QUOTA) {
-            log.warn(
-                String.format(
-                    "Warning: too many turns and/or too much time allocated to players per turn (%dms/%dms)",
-                    totalTurnTime, GAME_DURATION_HARD_QUOTA
-                )
-            );
         }
     }
 

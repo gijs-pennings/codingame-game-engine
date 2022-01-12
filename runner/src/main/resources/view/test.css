@@ -241,7 +241,7 @@ button {
     overflow: auto;
 }
 
-.game-outputs-up-log {
+.game-outputs-up-uinput, .game-outputs-up-log {
     margin-right: 20px;
 }
 
@@ -322,8 +322,6 @@ button {
     font-style: normal;
     text-transform: uppercase;
 }
-
-/* Pop-up and buttons */
 
 [ng-cloak] {
     display: none !important;

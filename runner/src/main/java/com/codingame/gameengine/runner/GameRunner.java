@@ -14,10 +14,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import com.codingame.gameengine.core.GameManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.codingame.gameengine.core.GameManager;
 import com.codingame.gameengine.runner.Command.InputCommand;
 import com.codingame.gameengine.runner.Command.OutputCommand;
 import com.codingame.gameengine.runner.dto.AgentDto;

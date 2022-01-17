@@ -30,8 +30,8 @@ import com.google.inject.Provider;
  */
 abstract public class GameManager<T extends AbstractPlayer> {
     // this should be the most "original" possible stdout when the application is launched
-    public static PrintStream stdout = System.out;
-    public static PrintStream stderr = System.err;
+    public static PrintStream stdout;
+    public static PrintStream stderr;
 
     @Inject private Provider<T> playerProvider;
     @Inject private Provider<AbstractReferee> refereeProvider;
@@ -56,10 +56,10 @@ abstract public class GameManager<T extends AbstractPlayer> {
 
     private PrintStream refereeStdout, refereeStderr;
 
-    private ByteArrayOutputStream currentRefereeOut = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream currentRefereeOut = new ByteArrayOutputStream();
     private String prevRefereeOut = "";
 
-    private ByteArrayOutputStream currentRefereeErr = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream currentRefereeErr = new ByteArrayOutputStream();
     private String prevRefereeErr = "";
 
     private List<Tooltip> currentTooltips = new ArrayList<>();

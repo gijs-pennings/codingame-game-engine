@@ -31,7 +31,7 @@
 				</div>
 
 				<div class="game-outputs">
-					<div class="game-outputs-up" ng-if="isNonemptyObject(errors)">
+					<div class="game-outputs-up" ng-if="!isEmptyObject(errors)">
 						<div class="game-outputs-up-log">
 							<div class="output-frame">
 								<div class="game-outputs-title">Game errors</div>
@@ -60,13 +60,13 @@
 										<div class="game-outputs-down-referee-title">Standard Output</div>
 										<div class="console-outputs pre-wrap" ng-bind="referee.stdout"></div>
 									</div>
-									<span ng-if="hasNonemptyStderr(referee)">
+									<div ng-if="referee.stderr">
 										<hr class="outputs-seperator">
 										<div class="console-output-stderr">
 											<div class="game-outputs-down-referee-title">Standard Error</div>
 											<div class="console-outputs pre-wrap" ng-bind="referee.stderr"></div>
 										</div>
-									</span>
+									</div>
 								</div>
 							</div>
 						</div>

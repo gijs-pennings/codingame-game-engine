@@ -35,13 +35,6 @@ function PlayerCtrl ($scope, $timeout, $interval, $element) {
 
   $scope.errors = {}
 
-  $scope.isNonemptyObject = function(obj) {
-    return Object.keys(obj).length > 0
-  }
-  $scope.hasNonemptyStderr = function(referee) {
-    return referee !== undefined && referee.stderr !== undefined
-  }
-
   function addError (error) {
     let errorText = error.message + '\n'
     if (error.cause) {

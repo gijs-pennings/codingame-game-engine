@@ -6,6 +6,8 @@ import java.io.OutputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import com.codingame.gameengine.core.RefereeMain;
 
@@ -65,7 +67,11 @@ class RefereeAgent extends Agent {
 
         thread = new Thread() {
             public void run() {
-                RefereeMain.start(agentStdin, new PrintStream(agentStdout));
+                try {
+                    RefereeMain.start(agentStdin, new PrintStream(agentStdout, false, StandardCharsets.UTF_8.name()));
+                } catch (UnsupportedEncodingException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
         thread.start();
